@@ -112,7 +112,7 @@ int main()
 				if(j==i) continue;
 				if( ( distance( parts.at(j).x, parts.at(j).y, parts.at(i).x, parts.at(i).y ) < 2)  ) {
 					parts.at(j).collide(parts.at(j).x, parts.at(j).y, parts.at(i).x, parts.at(i).y, parts.at(i));
-					std::cout << "hehe";
+					//std::cout << "hehe";
 				}
 			}
 		parts.at(i).display(window);
