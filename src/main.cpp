@@ -8,7 +8,9 @@ double distance(float x, float y, float x2, float y2) {
     return std::sqrt(dx * dx + dy * dy);
 }
 
+#ifndef damp
 #define damp 0.2
+#endif
 #ifndef damp2
 #define damp2 0.2
 #endif
@@ -77,13 +79,12 @@ class particle {
 		y-=sin(angle);
 		other.x+=cos(angle);
 		other.y+=sin(angle);
-		
-	/*	velX-=cos(angle)*damp;
+		velX-=cos(angle)*damp;
 		velY-=sin(angle)*damp;
 		other.velX+=cos(angle)*damp;
 		other.velY+=sin(angle)*damp;
 		sim();
-		other.sim();*/
+		other.sim();
 		
 		if(! ( distance( x, y, x2, y2 ) < 2)  ) break;
 		}
@@ -92,15 +93,22 @@ class particle {
 
 int main()
 {
+	sf::Clock clock;
 	std::vector<particle> parts;
 	int h = 0;
 	int a = 0;
+	sf::Font font("f.ttf");
+	sf::Text text(font);
+	
+text.setFillColor(sf::Color::Red);
+
 	//int apart = 4;
 	//int count = 20;
 	//for(int i = 0; i<count*apart; i+=apart) {
 //	}
 	sf::RenderWindow window(sf::VideoMode({200, 200}), "SFML works!");
 	while (window.isOpen()) {
+		clock.restart();
 		while (const std::optional event = window.pollEvent()) {
 			if (event->is<sf::Event::Closed>())
 				window.close();
@@ -132,6 +140,9 @@ int main()
 		} else h--;
 	//	a++;
 		//sf::sleep(sf::milliseconds(12));
-		sf::sleep(sf::milliseconds(14));
+		//std::cout << "\r";
+		text.setString(std::to_string(clock.getElapsedTime().asMilliseconds()));
+		window.draw(text);
+		sf::sleep(sf::milliseconds(14 - clock.getElapsedTime().asMilliseconds()));
 	}
 }

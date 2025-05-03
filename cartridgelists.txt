@@ -8,8 +8,10 @@ dep sfml-window
 dep sfml-system
 
 var damp2 0.2
+var damp 0.2
 
 bopt damp2 damp2
+bopt damp damp
 
 include main.cpp
 
