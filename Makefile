@@ -10,8 +10,11 @@ obj/:
 build/:
 	mkdir -p build/
 
+ifndef damp2
+damp2 := 0.2
+endif
 obj/main.o: src/main.cpp
-	${CXX} src/main.cpp -c -o obj/main.o 
+	${CXX} src/main.cpp -c -o obj/main.o -Ddamp2=${damp2} 
 
 build/physics: obj/main.o 
 	${CXX} obj/main.o  -o build/physics -lsfml-graphics -lsfml-window -lsfml-system 

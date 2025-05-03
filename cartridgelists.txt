@@ -7,6 +7,10 @@ dep sfml-graphics
 dep sfml-window
 dep sfml-system
 
+var damp2 0.2
+
+bopt damp2 damp2
+
 include main.cpp
 
 build physics

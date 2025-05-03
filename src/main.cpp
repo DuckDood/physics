@@ -9,6 +9,9 @@ double distance(float x, float y, float x2, float y2) {
 }
 
 #define damp 0.2
+#ifndef damp2
+#define damp2 0.2
+#endif
 class particle {
 	public:
 	float x = 0;
@@ -44,24 +47,24 @@ class particle {
 		bool ret=false;
 		if(y > 100) {
 			y = 99;
-			velY=0;
+			//velY=0;
 			ret = true;
 			velY=-velY;
-			velY*=0.9;
+			velY*=damp2;
 		}
 		if(x > 100) {
 			x = 99;
-			velX=0;
+			//velX=0;
 			ret = true;
 			velX=-velX;
-			velX*=0.9;
+			velX*=damp2;
 		}
 		if(x < 0) {
 			x = 1;
-			velX=0;
+			//velX=0;
 			ret = true;
 			velX=-velX;
-			velX*=0.9;
+			velX*=damp2;
 		}
 		return ret;
 	}
@@ -102,7 +105,7 @@ int main()
 		}	
 		window.clear();
 		for(int i = 0; i < parts.size(); i++) {
-			parts.at(i).sim();
+			//parts.at(i).sim();
 			parts.at(i).sim();
 			parts.at(i).collidew();
 			}
