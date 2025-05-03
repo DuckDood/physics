@@ -70,29 +70,31 @@ class particle {
 	}
 	void collide(float x, float y, float x2, float y2, particle &other) {
 		float angle = atan2(x2-x, y2-y);
-	//	for(;;) {
+		for(;;) {
 		collidew();
 		other.collidew();
-	/*	x-=cos(angle);
+		x-=cos(angle);
 		y-=sin(angle);
 		other.x+=cos(angle);
 		other.y+=sin(angle);
-		*/
-		velX-=cos(angle)*damp;
+		
+	/*	velX-=cos(angle)*damp;
 		velY-=sin(angle)*damp;
 		other.velX+=cos(angle)*damp;
 		other.velY+=sin(angle)*damp;
 		sim();
-		other.sim();
+		other.sim();*/
 		
-	//	if(! ( distance( x, y, x2, y2 ) < 2)  ) break;
-	//	}
+		if(! ( distance( x, y, x2, y2 ) < 2)  ) break;
+		}
 	}
 };
 
 int main()
 {
 	std::vector<particle> parts;
+	int h = 0;
+	int a = 0;
 	//int apart = 4;
 	//int count = 20;
 	//for(int i = 0; i<count*apart; i+=apart) {
@@ -113,16 +115,22 @@ int main()
 		for(int i = 0; i < parts.size(); i++) {
 			for(int j = 0; j<parts.size(); j++) {
 				if(j==i) continue;
+			//	for(int k = 0; k < 10; k++) {
 				if( ( distance( parts.at(j).x, parts.at(j).y, parts.at(i).x, parts.at(i).y ) < 2)  ) {
 					parts.at(j).collide(parts.at(j).x, parts.at(j).y, parts.at(i).x, parts.at(i).y, parts.at(i));
 					//std::cout << "hehe";
+			//	}
 				}
 			}
 		parts.at(i).display(window);
 		}
 		window.display();
+		if(!h/* && a < 120*/) {
 		particle part(0, 0, 1, 0, 0, 0.03);
 		parts.push_back(part);
+		h++;
+		} else h--;
+	//	a++;
 		//sf::sleep(sf::milliseconds(12));
 		sf::sleep(sf::milliseconds(14));
 	}
