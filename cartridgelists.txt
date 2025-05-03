@@ -1,0 +1,12 @@
+adddir obj/
+adddir build/
+cdir obj/
+cdir build/
+
+dep sfml-graphics
+dep sfml-window
+dep sfml-system
+
+include main.cpp
+
+build physics
